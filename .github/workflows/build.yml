@@ -1,0 +1,67 @@
+name: Build e release
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preparar compilador nativo x64
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+      - name: Instalar Inno Setup se necessário
+        shell: pwsh
+        run: |
+          $paths = @("${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe", "${env:ProgramFiles}\Inno Setup 6\ISCC.exe")
+          if (-not ($paths | Where-Object { Test-Path -LiteralPath $_ })) {
+            choco install innosetup --no-progress -y
+            if ($LASTEXITCODE -ne 0) { throw 'Falha ao instalar Inno Setup.' }
+          }
+      - name: Compilar, testar e gerar instalador
+        shell: pwsh
+        run: ./scripts/build.ps1 -Installer
+      - name: Verificar os ícones na máquina de build
+        shell: pwsh
+        run: |
+          $process = Start-Process -FilePath ./build/BasiliskBattery.exe -ArgumentList '--export-icons', 'artifacts/icons' -PassThru -Wait
+          if ($process.ExitCode -ne 0 -or (Get-ChildItem artifacts/icons/*.ico).Count -ne 55) { throw 'Falha ao gerar ícones.' }
+      - name: Guardar instalador e executável
+        uses: actions/upload-artifact@v4
+        with:
+          name: BasiliskBattery-Windows-x64
+          path: |
+            artifacts/BasiliskBattery-*.exe
+            artifacts/*.sha256
+          if-no-files-found: error
+      - name: Publicar versão nova automaticamente
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $version = (Get-Content VERSION -Raw).Trim()
+          $tag = "v$version"
+          $releases = gh release list --repo $env:GITHUB_REPOSITORY --limit 1000 --json tagName | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0) { throw 'Não foi possível consultar as releases.' }
+          if ($releases.tagName -contains $tag) {
+            Write-Host "A release $tag já existe; mantida sem substituir os arquivos."
+            exit 0
+          }
+          gh release create $tag "artifacts/BasiliskBattery-Setup-$version.exe" "artifacts/BasiliskBattery-Setup-$version.sha256" "artifacts/BasiliskBattery-$version.exe" --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title "Basilisk Battery $version" --notes-file artifacts/release-notes.md --latest
+          if ($LASTEXITCODE -ne 0) { throw 'Falha ao publicar release.' }

@@ -1,0 +1,7 @@
+# Histórico de versões
+
+## [1.0.0] - 2026-10-05
+
+- Veja a bateria do Basilisk V3 Pro ou V3 Pro 35K diretamente na área de notificações.
+- Ícone verde, amarelo ou vermelho conforme a carga; marca de concluído em 100%.
+- Reconhecimento automático por USB ou receptor wireless e opção de iniciar com o Windows.
