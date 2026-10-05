@@ -22,5 +22,6 @@ Leia [docs/SPEC.md](docs/SPEC.md) antes de alterar o comportamento. Basilisk Bat
 - Diagnóstico físico: `BasiliskBattery.exe --diagnose <arquivo.json>`. Código 0 indica leitura válida; 1 indica indisponível; 2 indica falha de execução. Nunca confundir diagnóstico sintético com prova do hardware.
 - Medir CPU/memória em runtime com consultas ativas; não afirmar consumo zero com base apenas no código.
 - Instalar o setup produzido e validar caminho/versão do processo instalado e `DisplayVersion` no registro. Preferências existentes devem sobreviver à atualização.
+- Testar upgrade com app aberto (`scripts/test-installer.ps1`, em ambiente de teste com startup do produto ausente). Nunca usar `New-Item -Force` em chave compartilhada do registro; criar somente se ausente e verificar preservação das demais entradas.
 - No resumo, informar `Versão esperada: X.Y.Z`, link da release, evidências e limitações físicas pendentes.
 - Preservar alterações não relacionadas. Stage apenas caminhos nomeados; não usar `git add -A`.

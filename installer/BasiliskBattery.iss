@@ -45,12 +45,25 @@ Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: 
 procedure CloseRunningApp();
 var
   Window: HWND;
+  Attempt: Integer;
 begin
   Window := FindWindowByClassName('BasiliskBattery.Window');
-  if Window <> 0 then begin
+  if Window <> 0 then
     PostMessage(Window, $0010, 0, 0);
-    Sleep(500);
+  for Attempt := 1 to 40 do begin
+    if not CheckForMutexes('Local\BasiliskBattery.SingleInstance') then
+      Exit;
+    Sleep(100);
   end;
+end;
+
+function InitializeSetup(): Boolean;
+begin
+  { Inno checks AppMutex before PrepareToInstall. Close the app before that check. }
+  CloseRunningApp();
+  Result := not CheckForMutexes('Local\BasiliskBattery.SingleInstance');
+  if not Result then
+    Log('Basilisk Battery did not finish closing within four seconds.');
 end;
 
 function PrepareToInstall(var NeedsRestart: Boolean): String;
@@ -62,5 +75,5 @@ end;
 function InitializeUninstall(): Boolean;
 begin
   CloseRunningApp();
-  Result := True;
+  Result := not CheckForMutexes('Local\BasiliskBattery.SingleInstance');
 end;

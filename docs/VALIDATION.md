@@ -1,4 +1,4 @@
-# Validação das versões 1.0.0 e 1.0.1
+# Validação das versões 1.0.0 a 1.0.2
 
 Evidência local registrada em 2026-10-05. Resultados pertencem à máquina e à amostra indicadas; não equivalem a garantia universal de desempenho.
 
@@ -33,3 +33,9 @@ Os relatórios locais e imagens de verificação ficam em `artifacts/` (ignorado
 ## Ajuste 1.0.1
 
 Por solicitação do usuário, peso da fonte aumentado de Semibold (600) para Bold (700), preservando altura 10/16 e padding. Os testes de protocolo e integração Windows continuam passando; exportação dos 55 ícones repetida para verificar o peso final. Esse ajuste não altera o transporte HID nem a frequência de consultas.
+
+## Ajuste 1.0.2
+
+O teste do setup público 1.0.1 com a instância anterior aberta revelou cancelamento antecipado pelo mutex. O fechamento passou para `InitializeSetup`, com espera pela liberação, e o workflow passou a instalar, iniciar o app e repetir o setup com uma preferência de startup salva antes de publicar. O teste verifica encerramento da instância anterior, versão/hash instalados e preservação da preferência, removendo o valor temporário ao terminar.
+
+Smoke test local 1.0.2 passou com app aberto e preferência salva. Após corrigir a preparação da chave compartilhada no próprio script, as 11 entradas de startup não relacionadas foram restauradas e permaneceram intactas na repetição. O teste agora compara nomes/tipos/valores antes/depois; os detalhes da recuperação estão em `ERRORS.md`.

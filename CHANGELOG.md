@@ -1,5 +1,9 @@
 # Histórico de versões
 
+## [1.0.2] - 2026-10-05
+
+- Atualização do app mais confiável, fechando a versão em execução antes de instalar.
+
 ## [1.0.1] - 2026-10-05
 
 - Números da bateria com fonte mais encorpada, mantendo o espaçamento confortável.

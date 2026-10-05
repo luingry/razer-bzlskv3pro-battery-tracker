@@ -40,6 +40,9 @@ jobs:
         run: |
           $process = Start-Process -FilePath ./build/BasiliskBattery.exe -ArgumentList '--export-icons', 'artifacts/icons' -PassThru -Wait
           if ($process.ExitCode -ne 0 -or (Get-ChildItem artifacts/icons/*.ico).Count -ne 55) { throw 'Falha ao gerar ícones.' }
+      - name: Validar instalação e upgrade com app aberto
+        shell: pwsh
+        run: ./scripts/test-installer.ps1 -InstallDir "$env:RUNNER_TEMP\Basilisk Battery"
       - name: Guardar instalador e executável
         uses: actions/upload-artifact@v4
         with:
