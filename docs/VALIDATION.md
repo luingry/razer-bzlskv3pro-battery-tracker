@@ -1,4 +1,4 @@
-# Validação da versão 1.0.0
+# Validação das versões 1.0.0 e 1.0.1
 
 Evidência local registrada em 2026-10-05. Resultados pertencem à máquina e à amostra indicadas; não equivalem a garantia universal de desempenho.
 
@@ -29,3 +29,7 @@ Get-Content battery.json
 ```
 
 Os relatórios locais e imagens de verificação ficam em `artifacts/` (ignorado no Git). O script de build também verifica a versão e executa os testes no CI.
+
+## Ajuste 1.0.1
+
+Por solicitação do usuário, peso da fonte aumentado de Semibold (600) para Bold (700), preservando altura 10/16 e padding. Os testes de protocolo e integração Windows continuam passando; exportação dos 55 ícones repetida para verificar o peso final. Esse ajuste não altera o transporte HID nem a frequência de consultas.

@@ -1,5 +1,9 @@
 # Histórico de versões
 
+## [1.0.1] - 2026-10-05
+
+- Números da bateria com fonte mais encorpada, mantendo o espaçamento confortável.
+
 ## [1.0.0] - 2026-10-05
 
 - Veja a bateria do Basilisk V3 Pro ou V3 Pro 35K diretamente na área de notificações.

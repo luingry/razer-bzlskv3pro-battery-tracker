@@ -4,7 +4,7 @@
 
 - App simples, sem janela principal, na área de notificações do Windows.
 - Ícone de bateria com percentual dentro do próprio ícone; tooltip informa modelo, conexão, percentual e carregamento quando disponível.
-- Fonte Segoe UI Semibold, altura nominal proporcional de 10/16 do canvas, centralizada com padding horizontal; fonte/altura do menu seguem as preferências nativas do Windows.
+- Fonte Segoe UI Bold, altura nominal proporcional de 10/16 do canvas, centralizada com padding horizontal; fonte/altura do menu seguem as preferências nativas do Windows.
 - Verde Razer `#44D62C` a partir de 50%; amarelo `#FFCD35` de 25% a 49%; vermelho `#FF4C4C` abaixo de 25%.
 - Em 100%, substituir o número por marca de concluído (check). Ausência/erro de leitura usa bateria cinza com `?`; nunca inventar 0% ou manter silenciosamente uma leitura antiga.
 - Menu em português: estado, “Iniciar com o Windows” (marcado quando ativo), “Atualizar agora”, nome/versão e “Sair”.

@@ -44,7 +44,7 @@ HICON BatteryIcon(int percent, int size) {
     } else {
         wchar_t text[8] = L"?";
         if (percent >= 0) swprintf_s(text, L"%d", percent);
-        HFONT font = CreateFontW(-n * 10 / 16, 0, 0, 0, FW_SEMIBOLD, FALSE, FALSE, FALSE,
+        HFONT font = CreateFontW(-n * 10 / 16, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE,
             DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, NONANTIALIASED_QUALITY,
             DEFAULT_PITCH, L"Segoe UI");
         HGDIOBJ oldFont = SelectObject(dc, font);
