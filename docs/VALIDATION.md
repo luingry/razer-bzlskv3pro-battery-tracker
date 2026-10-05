@@ -1,4 +1,4 @@
-# Validação das versões 1.0.0 a 1.0.2
+# Validação das versões 1.0.0 a 1.0.3
 
 Evidência local registrada em 2026-10-05. Resultados pertencem à máquina e à amostra indicadas; não equivalem a garantia universal de desempenho.
 
@@ -39,3 +39,7 @@ Por solicitação do usuário, peso da fonte aumentado de Semibold (600) para Bo
 O teste do setup público 1.0.1 com a instância anterior aberta revelou cancelamento antecipado pelo mutex. O fechamento passou para `InitializeSetup`, com espera pela liberação, e o workflow passou a instalar, iniciar o app e repetir o setup com uma preferência de startup salva antes de publicar. O teste verifica encerramento da instância anterior, versão/hash instalados e preservação da preferência, removendo o valor temporário ao terminar.
 
 Smoke test local 1.0.2 passou com app aberto e preferência salva. Após corrigir a preparação da chave compartilhada no próprio script, as 11 entradas de startup não relacionadas foram restauradas e permaneceram intactas na repetição. O teste agora compara nomes/tipos/valores antes/depois; os detalhes da recuperação estão em `ERRORS.md`.
+
+## Ajuste 1.0.3
+
+Tooltip padrão do Windows explicitamente habilitado em todas as atualizações (`NIF_TIP | NIF_SHOWTIP`), com texto começando por “Bateria: X%”, inclusive 100% com ícone de check. A [documentação da Microsoft](https://learn.microsoft.com/en-us/windows/win32/api/shellapi/ns-shellapi-notifyicondataw) define `NIF_SHOWTIP` para usar o tooltip padrão com `NOTIFYICON_VERSION_4`. A automação visual permanece interrompida conforme registrado acima; não afirmar que o hover foi exercitado fisicamente nesta sessão.

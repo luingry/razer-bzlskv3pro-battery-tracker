@@ -36,7 +36,8 @@ void UpdateTray(bool force = false) {
     int size = TraySize();
     if (!force && trayAdded && iconPercent == current.percent && iconSize == size) {
         // The tooltip can change independently (charging/connection).
-        NOTIFYICONDATAW tip = {}; tip.cbSize = sizeof(tip); tip.hWnd = window; tip.uID = 1; tip.uFlags = NIF_TIP;
+        NOTIFYICONDATAW tip = {}; tip.cbSize = sizeof(tip); tip.hWnd = window; tip.uID = 1;
+        tip.uFlags = NIF_TIP | NIF_SHOWTIP;
         wcscpy_s(tip.szTip, current.status); Shell_NotifyIconW(NIM_MODIFY, &tip);
         return;
     }

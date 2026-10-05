@@ -70,9 +70,9 @@ bool Device::ReadPath(const wchar_t* path, WORD pid, Reading& reading, HANDLE st
         DWORD chargingError = 0;
         if (Query(handle, 0x84, charging, stop, chargingError) && charging <= 1)
             reading.charging = charging;
-        swprintf_s(reading.status, L"Basilisk V3 Pro%s · %s · %d%%%s",
+        swprintf_s(reading.status, L"Bateria: %d%% · Basilisk V3 Pro%s · %s%s", reading.percent,
             pid == 0x00cc || pid == 0x00cd ? L" 35K" : L"",
-            battery::Wired(pid) ? L"USB" : L"Wireless", reading.percent,
+            battery::Wired(pid) ? L"USB" : L"Wireless",
             reading.charging == 1 ? L" · Carregando" : L"");
     }
     CloseHandle(handle);

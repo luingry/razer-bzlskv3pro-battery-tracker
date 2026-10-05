@@ -1,5 +1,9 @@
 # Histórico de versões
 
+## [1.0.3] - 2026-10-05
+
+- Ao passar o mouse sobre o ícone, veja a porcentagem da bateria no tooltip do Windows, inclusive em 100%.
+
 ## [1.0.2] - 2026-10-05
 
 - Atualização do app mais confiável, fechando a versão em execução antes de instalar.

@@ -4,6 +4,7 @@
 
 - App simples, sem janela principal, na área de notificações do Windows.
 - Ícone de bateria com percentual dentro do próprio ícone; tooltip informa modelo, conexão, percentual e carregamento quando disponível.
+- Hover usa o tooltip nativo do Windows, começando com “Bateria: X%”, inclusive “Bateria: 100%” quando o ícone mostra o check. Manter `NIF_SHOWTIP` tanto na inclusão quanto nas modificações do ícone com `NOTIFYICON_VERSION_4`.
 - Fonte Segoe UI Bold, altura nominal proporcional de 10/16 do canvas, centralizada com padding horizontal; fonte/altura do menu seguem as preferências nativas do Windows.
 - Verde Razer `#44D62C` a partir de 50%; amarelo `#FFCD35` de 25% a 49%; vermelho `#FF4C4C` abaixo de 25%.
 - Em 100%, substituir o número por marca de concluído (check). Ausência/erro de leitura usa bateria cinza com `?`; nunca inventar 0% ou manter silenciosamente uma leitura antiga.
